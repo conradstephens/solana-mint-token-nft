@@ -1,4 +1,4 @@
-import { Blob, Navbar } from "@/components";
+import { MintToken, Navbar } from "@/components";
 
 export default function Index() {
   return (
@@ -6,12 +6,7 @@ export default function Index() {
       <Navbar />
       <div className="flex-col-1 flex h-3/6 items-center justify-center">
         <div className="relative flex flex-col content-center items-center">
-          <div className="absolute left-2/4 top-2/4 translate-x-[-50%] translate-y-[-50%]">
-            <Blob />
-          </div>
-          <h1 className="relative text-3xl font-bold underline dark:text-white">
-            Hello world!
-          </h1>
+          <MintToken />
         </div>
       </div>
     </div>

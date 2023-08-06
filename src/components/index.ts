@@ -1,6 +1,6 @@
 import { CircularLoader } from "./Loaders";
 import { ThemeToggle, ThemeProvider } from "./Theme";
-import { Blob } from "./SVGs";
 import { Navbar } from "./Navbar";
+import MintToken from "./MintToken";
 
-export { CircularLoader, ThemeToggle, ThemeProvider, Blob, Navbar };
+export { CircularLoader, ThemeToggle, ThemeProvider, Navbar, MintToken };
