@@ -17,12 +17,12 @@ import {
   getMint,
   getAccount,
 } from "@solana/spl-token";
-import { useEffect } from "react";
+import LoadingButton from "./LoadingButton";
 
 export default function MintToken() {
   // collection to solana network
   const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
-  // random wallet
+  // create a random wallet
   const fromWallet = Keypair.generate();
   let mint: PublicKey;
   let fromTokenAccount: Account;
@@ -31,7 +31,6 @@ export default function MintToken() {
   );
 
   const onCreateToken = async () => {
-    console.log(`fromWallet: ${fromWallet.publicKey.toBase58()}`);
     // airdrop some SOL to pay for the fees
     const fromAirdropSignature = await connection.requestAirdrop(
       fromWallet.publicKey,
@@ -65,7 +64,7 @@ export default function MintToken() {
       connection,
       fromWallet,
       mint,
-      fromTokenAccount.address,
+      fromTokenAccount.address, // mint to the token account
       fromWallet.publicKey,
       10000000000, // 10 billion
     );
@@ -97,36 +96,31 @@ export default function MintToken() {
 
     const signature = await transfer(
       connection,
-      fromWallet,
-      fromTokenAccount.address,
-      toTokenAccount.address,
-      fromWallet.publicKey,
+      fromWallet, // payer
+      fromTokenAccount.address, // sender
+      toTokenAccount.address, // receiver
+      fromWallet.publicKey, // owner of the sender account
       10000000000, // 10 billion
     );
     console.log(`transfer token signature: ${signature}`);
   };
 
-  useEffect(() => {
-    // need buffer imported if not already imported
-    window.Buffer = window.Buffer || require("buffer").Buffer;
-  }, []);
-
   return (
     <div className="text-center gap-5 flex flex-col">
-      <div className="text-3xl font-bold">Mint Token Section</div>
+      <div className="text-3xl font-bold">Mint Token</div>
       <div className="flex gap-2">
-        <button className="btn" onClick={onCreateToken}>
+        <LoadingButton className="btn" onClick={onCreateToken}>
           Create token
-        </button>
-        <button className="btn" onClick={onMintToken}>
+        </LoadingButton>
+        <LoadingButton className="btn" onClick={onMintToken}>
           Mint token
-        </button>
-        <button className="btn" onClick={onCheckBalance}>
+        </LoadingButton>
+        <LoadingButton className="btn" onClick={onCheckBalance}>
           Check balance
-        </button>
-        <button className="btn" onClick={onSendToken}>
+        </LoadingButton>
+        <LoadingButton className="btn" onClick={onSendToken}>
           Send token
-        </button>
+        </LoadingButton>
       </div>
     </div>
   );

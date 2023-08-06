@@ -18,8 +18,7 @@
     "baseUrl": ".",
     "paths": {
       "@/components": ["src/components/index.ts"],
-      "@/utils": ["src/utils/index.ts"],
-      "@/atoms": ["src/atoms/index.ts"]
+      "@/utils": ["src/utils/index.ts"]
     },
     "plugins": [
       {
